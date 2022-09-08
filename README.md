@@ -42,6 +42,7 @@ npm run serve
 │  │ └─contants.js                - 상수 파일
 │  ├─components                   - 공통 사용 컴포넌트
 │  ├─router                       - 화면이동 파일
+│  ├─service                      - service script 파일
 │  ├─store                        - vuex 모듈
 │  │  └─modules
 │  ├─views                        - 웹 화면
