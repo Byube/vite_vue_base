@@ -19,7 +19,7 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 //전역에 공통 scss 사용 모듈 설정
-                // additionalData: `@import '@/assets/css/common/variables.scss';`,
+                // additionalData: `@import '@/assets/css/common/variables.scss';
             }
         }
     },
