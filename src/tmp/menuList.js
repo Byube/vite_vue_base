@@ -164,6 +164,11 @@ export default {
                         window.location = "https://github.com/primefaces/sakai-vue";
                     },
                 },
+                {
+                    label: "Chart Test",
+                    icon: "pi pi-fw pi-box",
+                    to: '/chartTest'
+                },
             ],
         }
 

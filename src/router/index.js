@@ -163,6 +163,11 @@ const routes = [
         path: '/access',
         name: 'access',
         component: () => import('@/pages/Access.vue')
+    },
+    {
+        path: '/chartTest',
+        name: 'ChartTest',
+        component: () => import('@/views/test/ChartTest.vue')
     }
 ];
 

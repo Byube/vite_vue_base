@@ -122,7 +122,7 @@ import BlockViewer from './BlockViewer.vue';
 
 const app = createApp(App);
 
-app.config.globalProperties.$appState = reactive({ theme: 'lara-dark-indigo', darkTheme: true });
+app.config.globalProperties.$appState = reactive({ theme: 'lara-light-indigo', darkTheme: false });
 
 
 //use
