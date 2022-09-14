@@ -11,7 +11,7 @@
 
 <script>
 import AppSubmenu from "@/views/header/sideNav/AppSubmenu.vue";
-import { getCurrentInstance } from "vue";
+import { computed, getCurrentInstance } from "vue";
 export default {
   props: {
     model: Array,
@@ -20,18 +20,14 @@ export default {
     AppSubmenu,
   },
   setup() {
-    const { emit } = getCurrentInstance();
+    const { emit, proxy } = getCurrentInstance();
     const onMenuItemClick = (event) => {
       emit("menuitem-click", event);
     };
+    computed(() => proxy.$appState.darkTheme);
     return {
       onMenuItemClick,
     };
-  },
-  computed: {
-    darkTheme() {
-      return this.$appState.darkTheme;
-    },
   },
 };
 </script>

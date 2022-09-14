@@ -114,7 +114,6 @@ import BlockViewer from './BlockViewer.vue';
 // (async () => {
     router.beforeEach((to, from, next) => {
         console.log(to.name);
-        
         window.scrollTo(0,0);
         next();
     });

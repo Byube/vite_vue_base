@@ -64,7 +64,7 @@ export default {
           "layout-mobile-sidebar-active": mobileMenuActive.value,
           "p-input-filled": false,
           "p-ripple-disabled": false,
-          // "layout-theme-light": false,
+          "layout-theme-light": false,
         },
       ];
     });
