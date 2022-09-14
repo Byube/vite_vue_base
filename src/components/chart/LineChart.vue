@@ -2,9 +2,48 @@
   <div>
     <h5>Linear Chart</h5>
     <Chart type="line" :data="lineData" :options="lineOptions" />
-    <div class="">
-        <h6>8m</h6>
-        <h6>9m</h6>
+    <div class="flex justify-content-between flex-wrap" v-if="isAgo">
+      <div
+        class="
+          flex
+          aligin-items-center
+          justify-content-center
+          w-4rem
+          h-4rem
+          font-bold
+          m-2
+        "
+      >
+        {{ lastMonth }}
+      </div>
+      <div
+        class="
+          flex
+          aligin-items-center
+          justify-content-center
+          w-4rem
+          h-4rem
+          font-bold
+          m-2
+        "
+      >
+        {{ thisMonth }}
+      </div>
+    </div>
+    <div class="flex justify-content-end flex-wrap" v-else>
+      <div
+        class="
+          flex
+          aligin-items-center
+          justify-content-center
+          w-4rem
+          h-4rem
+          font-bold
+          m-2
+        "
+      >
+        {{ thisMonth }}
+      </div>
     </div>
   </div>
 </template>
@@ -28,18 +67,50 @@ export default {
       type: Array,
       required: true,
     },
+    monthData: {
+      type: Array,
+      required: true,
+    },
   },
   setup(props) {
     const { proxy } = getCurrentInstance();
-    const { xLabels, dataSets } = toRefs(props);
+    const { xLabels, dataSets, monthData } = toRefs(props);
     const lineData = ref({
       labels: xLabels.value,
       datasets: dataSets.value,
     });
     let themeChangeListener = null;
     const lineOptions = ref(null);
+    const lightColor = ref({
+      labels: "#495057",
+      x_ticks: "#495057",
+      y_ticks: "#495057",
+      x_grid: "#ebedef",
+      y_grid: "#ebedef",
+    });
+    const darkColor = ref({
+      labels: "#ebedef",
+      x_ticks: "#ebedef",
+      y_ticks: "#ebedef",
+      x_grid: "rgba(160, 167, 181, .3)",
+      y_grid: "rgba(160, 167, 181, .3)",
+    });
+    const isAgo = ref(true);
+    const lastMonth = ref("");
+    const thisMonth = ref("");
+    const checkAgo = () => {
+      if (monthData.value[0] === monthData.value[1]) {
+        isAgo.value = false;
+        thisMonth.value = monthData.value[0];
+      } else {
+        isAgo.value = true;
+        thisMonth.value = monthData.value[0];
+        lastMonth.value = monthData.value[1];
+      }
+    };
 
     onMounted(() => {
+      checkAgo();
       themeChangeListener = (event) => {
         console.log(event);
         if (event.dark) {
@@ -67,25 +138,25 @@ export default {
         plugins: {
           legend: {
             labels: {
-              color: "#ebedef",
+              color: darkColor.value.labels,
             },
           },
         },
         scales: {
           x: {
             ticks: {
-              color: "#ebedef",
+              color: darkColor.value.x_ticks,
             },
             grid: {
-              color: "rgba(160, 167, 181, .3)",
+              color: darkColor.value.x_grid,
             },
           },
           y: {
             ticks: {
-              color: "#ebedef",
+              color: darkColor.value.y_ticks,
             },
             grid: {
-              color: "rgba(160, 167, 181, .3)",
+              color: darkColor.value.y_grid,
             },
           },
         },
@@ -97,25 +168,25 @@ export default {
         plugins: {
           legend: {
             labels: {
-              color: "#495057",
+              color: lightColor.value.labels,
             },
           },
         },
         scales: {
           x: {
             ticks: {
-              color: "#495057",
+              color: lightColor.value.x_ticks,
             },
             grid: {
-              color: "#ebedef",
+              color: lightColor.value.x_grid,
             },
           },
           y: {
             ticks: {
-              color: "#495057",
+              color: lightColor.value.y_ticks,
             },
             grid: {
-              color: "#ebedef",
+              color: lightColor.value.y_grid,
             },
           },
         },
@@ -123,13 +194,15 @@ export default {
     };
 
     const isDarkTheme = () => {
-      console.log(proxy.$appState.darkTheme === true);
       return proxy.$appState.darkTheme === true;
     };
 
     return {
       lineData,
       lineOptions,
+      isAgo,
+      lastMonth,
+      thisMonth,
     };
   },
 };
