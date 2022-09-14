@@ -1,23 +1,32 @@
 <template>
   <div class="layout-topbar">
-     <div class="w-3">
-      <div class="flex align-items-center justify-content-start">
-        <span class="font-bold text-2xl">
-          <router-link to="/">
-            <span>Admin Client Sample</span>
-          </router-link>
-        </span>
-        <span>
-          <button
-            class="p-link layout-menu-button layout-topbar-button"
-            @click="onMenuToggle"
+    <div class="flex align-items-center justify-content-center w-3">
+      <div class="flex w-full align-items-center justify-content-center">
+        <router-link to="/">
+          <div
+            class="
+              flex
+              align-items-center
+              justify-content-center
+              font-bold
+              text-2xl
+            "
           >
-            <i class="pi pi-bars"></i>
-          </button>
-        </span>
+            Medibloc
+          </div>
+          <div class="flex">제증명서발급 서비스</div>
+        </router-link>
+      </div>
+      <div>
+        <button
+          class="p-link layout-menu-button layout-topbar-button"
+          @click="onMenuToggle"
+        >
+          <i class="pi pi-bars"></i>
+        </button>
       </div>
     </div>
-    <button
+    <!-- <button
       class="p-link layout-topbar-menu-button layout-topbar-button"
       v-styleclass="{
         selector: '@next',
@@ -29,7 +38,7 @@
       }"
     >
       <i class="pi pi-ellipsis-v"></i>
-    </button>
+    </button> -->
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li>
         <button class="p-link layout-topbar-button">
