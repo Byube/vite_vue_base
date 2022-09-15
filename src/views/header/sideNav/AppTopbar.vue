@@ -1,6 +1,6 @@
 <template>
   <div class="layout-topbar">
-    <div class="flex align-items-center justify-content-center w-3">
+    <div class="flex align-items-center justify-content-center xl:w-2 lg:w-2 md:w-3 sm:w-4">
       <div class="flex w-full align-items-center justify-content-center">
         <router-link to="/">
           <div
