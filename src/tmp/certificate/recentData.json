@@ -1,0 +1,36 @@
+{
+    "resultData": [
+        {
+            "idx": "0001",
+            "user_name": "이효리",
+            "department": "내과",
+            "medicalstaff": "sample",
+            "treatmentDate": "2022-04-10",
+            "purpose": "보험사제출"
+        },
+        {
+            "idx": "0002",
+            "user_name": "김희선",
+            "department": "산부인과",
+            "medicalstaff": "",
+            "treatmentDate": "2022-04-10",
+            "purpose": "보험사제출"
+        },
+        {
+            "idx": "0003",
+            "user_name": "김희애",
+            "department": "정형외과",
+            "medicalstaff": "",
+            "treatmentDate": "2022-05-13",
+            "purpose": "보험사제출"
+        },
+        {
+            "idx": "0004",
+            "user_name": "현아",
+            "department": "내과",
+            "medicalstaff": "",
+            "treatmentDate": "2022-05-10",
+            "purpose": "보험사제출"
+        }
+    ]
+}

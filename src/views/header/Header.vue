@@ -7,7 +7,7 @@
 <script>
 import SideNav from "@/views/header/sideNav/SideNav.vue";
 import AppTopbar from "@/views/header/sideNav/AppTopbar.vue";
-import { activeClassName } from "@/service/sideNavService";
+import { activeClassName } from "@/service/sideNav/sideNavService";
 
 //tmp
 import menuList from '@/tmp/menuList.js'

@@ -21,7 +21,7 @@
 import AppConfig from "@/views/themes/AppConfig.vue";
 import Header from "@/views/header/Header.vue";
 import Footer from "@/views/footer/Footer.vue";
-import { activeClassName } from "@/service/sideNavService";
+import { activeClassName } from "@/service/sideNav/sideNavService";
 import { computed } from "@vue/runtime-core";
 export default {
   components: {

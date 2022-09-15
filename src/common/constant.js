@@ -36,6 +36,11 @@ export default {
             CHANGELAYOUTMODE: 'sideNav/changeLayoutMode',
             CHANGEMENUONCLICK: 'sideNav/checkMenuOnclick',
         }
+    },
+    data:{
+        home:{
+            TABLE_HEADER:["환자명", "진료과", "의료진", "진료일", "용도"]
+        }
     }
 
 

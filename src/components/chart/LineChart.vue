@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5>Linear Chart</h5>
-    <Chart type="line" :data="lineData" :options="lineOptions" />
+    <Chart type="line" :data="lineData" :options="lineOptions" :height="50" />
   </div>
   <div class="flex justify-content-between flex-wrap" v-if="isAgo">
     <div class="flex aligin-items-center justify-content-center font-bold m-2">

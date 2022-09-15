@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="col-12">
-      <div class="card">
+      <div class="card h-28rem">
         <LineChart
           :xLabels="xLabels"
           :dataSets="dataSets"
@@ -29,26 +29,46 @@
       </div>
     </div>
     <div class="col-12">
-      <div class="grid">
+      <div class="grid h-30rem">
         <div class="col-8">
           <div class="card h-full">
             <div class="text-3xl m-2 font-bold">
               <span>제증명서 발급요청 (어제/오늘)</span>
             </div>
             <div>
-              <DataTable :value="products" responsiveLayout="scroll">
-                <Column field="code" header="Code"></Column>
-                <Column field="name" header="Name"></Column>
-                <Column field="category" header="Category"></Column>
-                <Column field="quantity" header="Quantity"></Column>
-              </DataTable>
+              <!-- <DataTable :value="products" responsiveLayout="scroll">
+                <Column field="user_name" header="환자명"></Column>
+                <Column field="department" header="진료과"></Column>
+                <Column field="medicalstaff" header="의료진"></Column>
+                <Column field="treatmentDate" header="진료일"></Column>
+                <Column field="purpose" header="용도"></Column>
+              </DataTable> -->
+              <CertTable :TableData="products" :TableHeader="productHeaders"/>
             </div>
           </div>
         </div>
-        <div class="col-4">
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
+        <div class="col-4 h-full">
+          <div class="card">
+            <div>발급대기</div>
+            <div>20명</div>
+            <div>
+              <Button label="바로가기" class="m-2" />
+            </div>
+          </div>
+          <div class="card">
+            <div>발급완료</div>
+            <div>95,000명</div>
+            <div>
+              <Button label="OK" class="mr-2 mb-2" />
+            </div>
+          </div>
+          <div class="card">
+            <div>내역없음 처리</div>
+            <div>20,008명</div>
+            <div>
+              <Button label="OK" class="mr-2 mb-2" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -58,13 +78,17 @@
 <script>
 import { ref, onMounted } from "vue";
 import LineChart from "@/components/chart/LineChart.vue";
-import { getOneMonth, getMonthData } from "@/service/dateService.js";
+import { getOneMonth, getMonthData } from "@/service/date/dateService.js";
 import chartData from "@/tmp/chart/chartData.json";
 
-import ProductService from '@/service/ProductService';
+import constant from "@/common/constant";
+
+import CertTable from "@/components/table/BasicTable.vue";
+import CertificateData from "@/tmp/certificate/recentData.json";
 export default {
   components: {
     LineChart,
+    CertTable,
   },
   setup() {
     const monthData = getMonthData();
@@ -80,21 +104,15 @@ export default {
       },
     ]);
 
-    //임시
-    onMounted(() => {
-            productService.value.getProductsSmall().then(data => products.value = data);
-        })
-
-        const products = ref();
-        const productService = ref(new ProductService());
-
+    let products = CertificateData.resultData;
+    const productHeaders = ref(constant.data.home.TABLE_HEADER);
 
     return {
       xLabels,
       dataSets,
       monthData,
       products,
-      productService
+      productHeaders,
     };
   },
 };
