@@ -168,6 +168,11 @@ const routes = [
         path: '/chartTest',
         name: 'ChartTest',
         component: () => import('@/views/test/ChartTest.vue')
+    },
+    {
+        path: '/certificate',
+        name: 'Certificate',
+        component: () => import('@/views/test/Certificate.vue')
     }
 ];
 

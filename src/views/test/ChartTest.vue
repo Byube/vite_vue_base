@@ -35,16 +35,11 @@
             <div class="text-3xl m-2 font-bold">
               <span>제증명서 발급요청 (어제/오늘)</span>
             </div>
+            <!--테이블 부분-->
             <div>
-              <!-- <DataTable :value="products" responsiveLayout="scroll">
-                <Column field="user_name" header="환자명"></Column>
-                <Column field="department" header="진료과"></Column>
-                <Column field="medicalstaff" header="의료진"></Column>
-                <Column field="treatmentDate" header="진료일"></Column>
-                <Column field="purpose" header="용도"></Column>
-              </DataTable> -->
-              <CertTable :TableData="products" :TableHeader="productHeaders"/>
+              <CertTable :TableData="products" :TableHeader="productHeaders" />
             </div>
+            <!--테이블 부분-->
           </div>
         </div>
         <div class="col-4 h-full">
@@ -76,7 +71,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import LineChart from "@/components/chart/LineChart.vue";
 import { getOneMonth, getMonthData } from "@/service/date/dateService.js";
 import chartData from "@/tmp/chart/chartData.json";

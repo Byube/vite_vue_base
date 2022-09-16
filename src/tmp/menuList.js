@@ -165,9 +165,14 @@ export default {
                     },
                 },
                 {
-                    label: "Chart Test",
+                    label: "Home",
                     icon: "pi pi-fw pi-box",
                     to: '/chartTest'
+                },
+                {
+                    label: "제증명서",
+                    icon: "pi pi-fw pi-box",
+                    to: '/certificate'
                 },
             ],
         }
