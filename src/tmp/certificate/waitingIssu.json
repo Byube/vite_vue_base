@@ -1,0 +1,164 @@
+{
+    "resultData": [
+        {
+            "id": "1",
+            "userNm": "민지",
+            "userPhone": "010-1234-9999",
+            "userBirth": "1990.03.12",
+            "userGender": "F",
+            "reqDate": "2022-08-29",
+            "diagnosisData": "2022-08-04",
+            "resData": "",
+            "resStatus": "Y",
+            "purpose": "보험청구",
+            "applicationCert": [
+                {
+                    "certificateNm": "입원증명서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료확인서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진료비세부내역서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진단서",
+                    "status": "N"
+                }
+            ],
+            "department":"정형외과",
+            "medicalstaff":"허준"
+        },
+        {
+            "id": "2",
+            "userNm": "혜인",
+            "userPhone": "010-1234-8888",
+            "userBirth": "1991.03.22",
+            "userGender": "F",
+            "reqDate": "2022-08-29",
+            "diagnosisData": "2022-08-05",
+            "resData": "",
+            "resStatus": "Y",
+            "purpose": "보험청구",
+            "applicationCert": [
+                {
+                    "certificateNm": "입원증명서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료확인서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진료비세부내역서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진단서",
+                    "status": "N"
+                }
+            ],
+            "department":"정형외과",
+            "medicalstaff":"허준"
+        },
+        {
+            "id": "3",
+            "userNm": "하나",
+            "userPhone": "010-1234-7777",
+            "userBirth": "1992.04.13",
+            "userGender": "F",
+            "reqDate": "2022-08-29",
+            "diagnosisData": "2022-08-04",
+            "resData": "",
+            "resStatus": "Y",
+            "purpose": "보험청구",
+            "applicationCert": [
+                {
+                    "certificateNm": "입원증명서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료확인서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진료비세부내역서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진단서",
+                    "status": "N"
+                }
+            ],
+            "department":"정형외과",
+            "medicalstaff":"허준"
+        },
+        {
+            "id": "4",
+            "userNm": "혜린",
+            "userPhone": "010-1234-6666",
+            "userBirth": "1993.05.02",
+            "userGender": "F",
+            "reqDate": "2022-08-29",
+            "diagnosisData": "2022-08-04",
+            "resData": "",
+            "resStatus": "Y",
+            "purpose": "보험청구",
+            "applicationCert": [
+                {
+                    "certificateNm": "입원증명서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료확인서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진료비세부내역서",
+                    "status": "N"
+                },
+                {
+                    "certificateNm": "진단서",
+                    "status": "N"
+                }
+            ],
+            "department":"정형외과",
+            "medicalstaff":"허준"
+        },
+        {
+            "id": "5",
+            "userNm": "다니엘 마쉬",
+            "userPhone": "010-1234-5555",
+            "userBirth": "1994.10.01",
+            "userGender": "F",
+            "reqDate": "2022-08-29",
+            "diagnosisData": "2022-08-04",
+            "resData": "",
+            "resStatus": "Y",
+            "purpose": "보험청구",
+            "applicationCert": [
+                {
+                    "certificateNm": "입원증명서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료확인서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진료비세부내역서",
+                    "status": "Y"
+                },
+                {
+                    "certificateNm": "진단서",
+                    "status": "N"
+                }
+            ],
+            "department":"정형외과",
+            "medicalstaff":"허준"
+        }
+    ]
+}
