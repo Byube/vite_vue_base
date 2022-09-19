@@ -1,7 +1,6 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import constant from '@/common/constant.js';
-// import api from '@/api/index.js';
 
 export const activeClassName = () => {
     const store = useStore();
@@ -10,6 +9,7 @@ export const activeClassName = () => {
     const staticMenuInactive = computed(() => store.state.sideNav.staticMenuInactive);
     const layoutMode = computed(() => store.state.sideNav.layoutMode);
     const checkMenuOnclick = computed(() => store.state.sideNav.menuClick);
+    const onMenu = computed(() => store.state.sideNav.onMenu);
     const changeMobileMenuState = () => {
         store.dispatch(constant.store.menulist.CHANGEMOBILEMENUSTATE, !mobileMenuActive.value);
     };
@@ -31,19 +31,24 @@ export const activeClassName = () => {
     const changeMenuOnclick = (status) => {
         store.dispatch(constant.store.menulist.CHANGEMENUONCLICK, status);
     };
+    const changeNowClickMenu = (menuNm) => {
+        store.dispatch(constant.store.menulist.CHANGENOWCLICKMENU, menuNm);
+    };
     return {
-        changeMobileMenuState,
-        changeStaticMenuInactive,
-        changeLayoutMode,
+        onMenu,
         overlayMenuActive,
         layoutMode,
         mobileMenuActive,
         staticMenuInactive,
+        checkMenuOnclick,
+        changeMobileMenuState,
+        changeStaticMenuInactive,
+        changeLayoutMode,
         changeOverlayMenuState,
         changeOverMenuState,
         changeMobileState,
         changeMenuOnclick,
-        checkMenuOnclick
+        changeNowClickMenu
     }
 }
 

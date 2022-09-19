@@ -10,7 +10,8 @@ import AppTopbar from "@/views/header/sideNav/AppTopbar.vue";
 import { activeClassName } from "@/service/sideNav/sideNavService";
 
 //tmp
-import menuList from '@/tmp/menuList.js'
+// import menuList from '@/tmp/menuList.js'
+import menuList from '@/tmp/samMenu.js'
 
 export default {
   components: {
@@ -28,8 +29,8 @@ export default {
       changeOverMenuState,
       changeMobileState,
       changeMenuOnclick,
+      changeNowClickMenu,
     } = activeClassName();
-    // const { checkOnMenu } = menuOnClick();
 
     //메뉴바 숨김 기능
     const onMenuToggle = (event) => {
@@ -54,9 +55,9 @@ export default {
     };
 
     const onMenuItemClick = (event) => {
+      console.log(event.item.label);
       if (event.item && !event.item.items) {
-        // checkOnMenu(event.item.label);
-        // checkOnMenu(event.item.headerNm);
+        changeNowClickMenu(event.item.label);
         // window.localStorage.setItem(constant.main.ONCLICKMENU,event.item.label);
         // window.localStorage.setItem(constant.main.ONCLICKMENU,event.item.headerNm);
         changeOverMenuState(false);

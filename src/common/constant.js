@@ -35,12 +35,17 @@ export default {
             CHANGESTATICMENUINACTIVE: 'sideNav/changeStaticMenuInactive',
             CHANGELAYOUTMODE: 'sideNav/changeLayoutMode',
             CHANGEMENUONCLICK: 'sideNav/checkMenuOnclick',
+            CHANGENOWCLICKMENU: 'sideNav/changeNowClickMenu'
         }
     },
     data:{
         home:{
             TABLE_HEADER:["환자명", "진료과", "의료진", "진료일", "용도"]
         }
+    },
+    regExp:{
+        NUMBER: /^[0-9]+$/,
+        HANGUL: /^[ㄱ-ㅎ|가-힣]+$/,
     }
 
 

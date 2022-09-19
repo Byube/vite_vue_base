@@ -1,8 +1,18 @@
 <template>
   <div class="layout-topbar">
-    <div class="flex align-items-center justify-content-center xl:w-2 lg:w-2 md:w-3 sm:w-4">
+    <div
+      class="
+        flex
+        align-items-center
+        justify-content-center
+        xl:w-2
+        lg:w-2
+        md:w-3
+        sm:w-4
+      "
+    >
       <div class="flex w-full align-items-center justify-content-center">
-        <router-link to="/">
+        <router-link to="/home">
           <div
             class="
               flex
@@ -26,51 +36,27 @@
         </button>
       </div>
     </div>
-    <!-- <button
-      class="p-link layout-topbar-menu-button layout-topbar-button"
-      v-styleclass="{
-        selector: '@next',
-        enterClass: 'hidden',
-        enterActiveClass: 'scalein',
-        leaveToClass: 'hidden',
-        leaveActiveClass: 'fadeout',
-        hideOnOutsideClick: true,
-      }"
-    >
-      <i class="pi pi-ellipsis-v"></i>
-    </button> -->
-    <ul class="layout-topbar-menu hidden lg:flex origin-top">
-      <li>
-        <button class="p-link layout-topbar-button">
-          <i class="pi pi-calendar"></i>
-          <span>Events</span>
-        </button>
-      </li>
-      <li>
-        <button class="p-link layout-topbar-button">
-          <i class="pi pi-cog"></i>
-          <span>Settings</span>
-        </button>
-      </li>
-      <li>
-        <button class="p-link layout-topbar-button">
-          <i class="pi pi-user"></i>
-          <span>Profile</span>
-        </button>
-      </li>
-    </ul>
+    <div class="ml-4 font-bold text-xl">
+      <span> {{ onMenu }} </span>
+    </div>
+    <div class="layout-topbar-menu hidden lg:flex origin-top">
+      <Button label="Logout" class="p-button-secondary" />
+    </div>
   </div>
 </template>
 
 <script>
 import { getCurrentInstance } from "vue";
+import { activeClassName } from "@/service/sideNav/sideNavService";
 export default {
   setup() {
+    const { onMenu } = activeClassName();
     const { emit } = getCurrentInstance();
     const onMenuToggle = (event) => {
       emit("menu-toggle", event);
     };
     return {
+      onMenu,
       onMenuToggle,
     };
   },

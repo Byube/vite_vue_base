@@ -78,7 +78,7 @@ import chartData from "@/tmp/chart/chartData.json";
 
 import constant from "@/common/constant";
 
-import CertTable from "@/components/table/BasicTable.vue";
+import CertTable from "@/components/tables/BasicTable.vue";
 import CertificateData from "@/tmp/certificate/recentData.json";
 export default {
   components: {

@@ -7,7 +7,7 @@ export default {
         layoutMode: 'static',
         menuClick: false,
         permission: {},
-
+        onMenu: 'Home'
     },
     mutations: {
         CHANGE_OVERLAY_MENU(state, payload) {
@@ -24,6 +24,9 @@ export default {
         },
         CHANGE_MENU_CLICK_STATE(state, payload) {
             state.menuClick = payload;
+        },
+        CHANGE_NOW_CLICK_MENU(state, payload) {
+            state.onMenu = payload;
         }
     },
     actions: {
@@ -41,6 +44,9 @@ export default {
         },
         checkMenuOnclick({ commit }, status) {
             commit('CHANGE_MENU_CLICK_STATE', status);
+        },
+        changeNowClickMenu({ commit }, menuNm) {
+            commit('CHANGE_NOW_CLICK_MENU', menuNm);
         }
     },
     getters: {

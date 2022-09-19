@@ -165,14 +165,29 @@ const routes = [
         component: () => import('@/pages/Access.vue')
     },
     {
-        path: '/chartTest',
-        name: 'ChartTest',
-        component: () => import('@/views/test/ChartTest.vue')
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/views/test/Home.vue')
     },
     {
         path: '/certificate',
         name: 'Certificate',
         component: () => import('@/views/test/Certificate.vue')
+    },
+    {
+        path: '/stats',
+        name: 'Stats',
+        component: () => import('@/views/test/Stats.vue')
+    },
+    {
+        path: '/settingUser',
+        name: 'SettingUser',
+        component: () => import('@/views/test/SettingUser.vue')
+    },
+    {
+        path: '/settingDocument',
+        name: 'SettingDocument',
+        component: () => import('@/views/test/SettingDocument.vue')
     }
 ];
 

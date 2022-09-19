@@ -27,7 +27,6 @@ export default {
   },
   setup(props) {
     let { TableData,TableHeader } = toRefs(props);
-    console.log(TableData.value);
     let columns = [];
     const keys = Object.keys(TableData.value[0]);
     for (let i = 1; i < keys.length; i++) {
