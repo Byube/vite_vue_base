@@ -1,6 +1,6 @@
 <template>
 	<div class="grid">
-		<div class="col-12 lg:col-6">
+		<!-- <div class="col-12 lg:col-6">
 			<div class="card p-fluid">
 				<h5>Dialog</h5>
 				<Dialog header="Dialog" v-model:visible="display" :breakpoints="{'960px': '75vw'}" :style="{width: '30vw'}" :modal="true">
@@ -109,7 +109,7 @@
 				<ConfirmPopup></ConfirmPopup>
 				<Button ref="popup" @click="confirm($event)" icon="pi pi-check" label="Confirm" class="mr-2"></Button>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 

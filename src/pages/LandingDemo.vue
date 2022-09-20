@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="surface-0 overflow-hidden">
         <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static">
             <router-link to="/" class="flex align-items-center">
@@ -422,4 +422,4 @@ export default {
         max-width: 100%;
     }
 }
-</style>
+</style> -->
