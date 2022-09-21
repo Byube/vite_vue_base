@@ -1,4 +1,5 @@
 <template>
+  <div>check : {{ checkeds }}</div>
   <DataTable
     :value="TableData"
     v-model:expandedRows="expandedRows"
@@ -149,7 +150,7 @@
             <div class="col-2"></div>
             <!--2-->
             <div class="col-5">
-              <div @click="noDatas">
+              <div @click="noDatas(slotProps.data.userNm)">
                 <p
                   class="
                     flex
@@ -162,7 +163,11 @@
                   내역없음 처리
                 </p>
                 <div class="p-inputgroup cursor-pointer">
-                  <Checkbox v-model="checked" :binary="true" :disabled="true" />
+                  <Checkbox
+                    v-model="checkeds"
+                    name="noData"
+                    :value="slotProps.data.userNm"
+                  />
                   <p class="ml-2">진료내역이 없어 내역없음 처리 합니다.</p>
                 </div>
                 <div class="mt-3 cursor-pointer">
@@ -179,43 +184,43 @@
           </div>
         </div>
       </div>
+      <Dialog
+        header="주의 하세요"
+        v-model:visible="display"
+        :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+        :style="{ width: '400px' }"
+        :modal="true"
+      >
+        <div
+          class="
+            confirmation-content
+            flex
+            align-items-center
+            justify-content-center
+          "
+        >
+          <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+          <span>내역없음 처리시 고객의 신청 및 결제 내역이 취소 됩니다.</span>
+        </div>
+        <template #footer>
+          <Button
+            label="취소"
+            icon="pi pi-times"
+            @click="dialogAction(0)"
+            class="p-button-text"
+          />
+          <Button
+            label="진행"
+            icon="pi pi-check"
+            @click="dialogAction(1)"
+            class="p-button-text"
+            autofocus
+          />
+        </template>
+      </Dialog>
     </template>
     <!--expansion datas-->
   </DataTable>
-  <Dialog
-    header="주의 하세요"
-    v-model:visible="display"
-    :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: '400px' }"
-    :modal="true"
-  >
-    <div
-      class="
-        confirmation-content
-        flex
-        align-items-center
-        justify-content-center
-      "
-    >
-      <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-      <span>내역없음 처리시 고객의 신청 및 결제 내역이 취소 됩니다.</span>
-    </div>
-    <template #footer>
-      <Button
-        label="취소"
-        icon="pi pi-times"
-        @click="dialogAction(0)"
-        class="p-button-text"
-      />
-      <Button
-        label="진행"
-        icon="pi pi-check"
-        @click="dialogAction(1)"
-        class="p-button-text"
-        autofocus
-      />
-    </template>
-  </Dialog>
 </template>
 
 <script>
@@ -241,7 +246,9 @@ export default {
     const expandedRows = ref([]);
     const loading = ref(true);
     const checked = ref(false);
+    const checkeds = ref([]);
     const display = ref(false);
+    const checkUser = ref("");
     const filters = ref({
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       userNm: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -293,18 +300,19 @@ export default {
     const onUpload = () => {
       console.log("file");
     };
-    const noDatas = () => {
-      console.log("no");
+    const noDatas = (who) => {
+      checkUser.value = who;
       display.value = true;
     };
-    const dialogAction = (cnt) =>{
-      if(cnt === 1){
-        checked.value = true;
+    const dialogAction = async (cnt) => {
+      if (cnt === 1) {
+        checkeds.value.push(checkUser.value);
       } else {
-        checked.value = false;
+        checkeds.value = checkeds.value.filter((e) => e !== checkUser.value);
       }
       display.value = false;
-    }
+    };
+
     return {
       TableData,
       which,
@@ -312,6 +320,7 @@ export default {
       loading,
       filters,
       checked,
+      checkeds,
       display,
       closeUserData,
       openUserData,
@@ -321,7 +330,7 @@ export default {
       resetFilter,
       onUpload,
       noDatas,
-      dialogAction
+      dialogAction,
     };
   },
 };
