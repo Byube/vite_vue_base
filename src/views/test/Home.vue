@@ -20,6 +20,7 @@
       </div>
     </div>
     <div class="col-12">
+      <!-- 차트 부분 -->
       <div class="card h-28rem">
         <LineChart
           :xLabels="xLabels"
@@ -27,6 +28,7 @@
           :monthData="monthData"
         />
       </div>
+      <!-- 차트 부분 -->
     </div>
     <div class="col-12">
       <div class="grid h-30rem">

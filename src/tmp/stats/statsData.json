@@ -1,0 +1,52 @@
+{
+    "resultData": [
+        {
+            "statsIdx": "0001",
+            "statsNm": "진료비영수증",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0002",
+            "statsNm": "진료비세부산정내역서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0003",
+            "statsNm": "처방전",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0004",
+            "statsNm": "입퇴원확인서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0005",
+            "statsNm": "통원확인서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0006",
+            "statsNm": "진료비납입확인서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0007",
+            "statsNm": "입퇴원증명서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        },
+        {
+            "statsIdx": "0008",
+            "statsNm": "진단서",
+            "statsTotal": "90",
+            "statsAccumulate": "1,020,909"
+        }
+    ]
+}

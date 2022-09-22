@@ -1,5 +1,4 @@
 <template>
-  <div>check : {{ checkeds }}</div>
   <DataTable
     :value="TableData"
     v-model:expandedRows="expandedRows"
@@ -131,14 +130,13 @@
               <div>
                 <FileUpload
                   name="demo[]"
-                  url="./upload.php"
                   accept="image/*"
                   chooseLabel="파일선택"
-                  uploadLabel="업로드"
-                  cancelLabel="취소"
+                  :showUploadButton="false"
+                  :showCancelButton="false"
                   :maxFileSize="1000000"
                   :multiple="true"
-                  @upload="onUpload"
+                  @select="onUpload"
                 >
                   <template #empty>
                     <p>파일을 여기로 옮기세요(Drag & Drop)</p>
@@ -180,7 +178,7 @@
             <!--2-->
           </div>
           <div>
-            <Button label="완료" class="w-full" />
+            <Button label="완료" class="w-full" @click="sendDatas"/>
           </div>
         </div>
       </div>
@@ -297,8 +295,10 @@ export default {
         userPhone: { value: null, matchMode: FilterMatchMode.CONTAINS },
       };
     };
-    const onUpload = () => {
-      console.log("file");
+
+    let file;
+    const onUpload = (fileData) => {
+      file = fileData.files[0];
     };
     const noDatas = (who) => {
       checkUser.value = who;
@@ -311,6 +311,10 @@ export default {
         checkeds.value = checkeds.value.filter((e) => e !== checkUser.value);
       }
       display.value = false;
+    };
+
+    const sendDatas = () => {
+      console.log("file", file);
     };
 
     return {
@@ -331,6 +335,7 @@ export default {
       onUpload,
       noDatas,
       dialogAction,
+      sendDatas,
     };
   },
 };

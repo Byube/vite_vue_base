@@ -90,11 +90,11 @@ const routes = [
     //     name: 'messages',
     //     component: () => import('@/components/MessagesDemo.vue')
     // },
-    // {
-    //     path: '/file',
-    //     name: 'file',
-    //     component: () => import('@/components/FileDemo.vue')
-    // },
+    {
+        path: '/file',
+        name: 'file',
+        component: () => import('@/components/FileDemo.vue')
+    },
     // {
     //     path: '/chart',
     //     name: 'chart',
@@ -105,11 +105,11 @@ const routes = [
     //     name: 'misc',
     //     component: () => import('@/components/MiscDemo.vue')
     // },
-    // {
-    //     path: '/crud',
-    //     name: 'crud',
-    //     component: () => import('@/pages/CrudDemo.vue')
-    // },
+    {
+        path: '/crud',
+        name: 'crud',
+        component: () => import('@/pages/CrudDemo.vue')
+    },
     // {
     //     path: '/timeline',
     //     name: 'timeline',
