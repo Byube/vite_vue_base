@@ -9,7 +9,7 @@
             "reqDate": "2022.08.29",
             "diagnosisData": "2022.08.04",
             "resData": "",
-            "resStatus": "Y",
+            "resStatus": "N",
             "purpose": "보험청구",
             "applicationCert": [
                 {
@@ -41,7 +41,7 @@
             "reqDate": "2022-08-29",
             "diagnosisData": "2022-08-05",
             "resData": "",
-            "resStatus": "Y",
+            "resStatus": "N",
             "purpose": "보험청구",
             "applicationCert": [
                 {

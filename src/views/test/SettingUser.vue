@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--1-->
     <div class="grid">
       <div class="flex col-12">
         <div class="card col-4">
@@ -51,69 +52,105 @@
         </div>
       </div>
     </div>
-
-    <div class="grid">
-      <!--1-->
-      <div class="col-4" v-for="(data, idx) in userList" :key="idx">
-        <div class="card">
-          <div class="m-3">
-            <span>이름</span>
-          </div>
-          <div class="m-3 font-bold">
-            <span>{{ data.userNm }}</span>
-          </div>
-          <div class="m-3">
-            <span>아이디</span>
-          </div>
-          <div class="m-3 font-bold">
-            <span>{{ data.userId }}</span>
-          </div>
-          <div class="m-3 text-teal-300">
-            <span>PW 변경</span>
-          </div>
-          <div class="m-3 text-teal-300">
-            <InputText placeholder="변경할 패스워드 입력" class="w-full" />
-          </div>
-          <div>
-            <hr />
-          </div>
-          <div class="flex justify-content-between">
-            <Button
-              class="flex justify-content-center align-items-center"
-              label="기록확인"
-            />
-            <Button
-              class="
-                flex
-                justify-content-center
-                align-items-center
-                p-button-outlined p-button-danger
-              "
-              label="계정삭제"
-            />
-            <Button
-              class="
-                flex
-                justify-content-center
-                align-items-center
-                p-button-outlined p-button-success
-              "
-              label="변경"
-            />
+    <!--1-->
+    <!--2-->
+    <swiper
+      :centeredSlides="true"
+      :autoplay="{
+        delay: 2500,
+        disableOnInteraction: false,
+      }"
+      :pagination="{
+        clickable: true,
+      }"
+      :navigation="true"
+      :modules="modules"
+      class="mySwiper"
+    >
+      <swiper-slide v-for="(mdata, idx) in showUserList" :key="idx">
+        <div class="grid">
+          <div class="col-4" v-for="(data, index) in mdata.show" :key="index">
+            <div class="card">
+              <div class="m-3">
+                <span>이름</span>
+              </div>
+              <div class="m-3 font-bold">
+                <span>{{ data.userNm }}</span>
+              </div>
+              <div class="m-3">
+                <span>아이디</span>
+              </div>
+              <div class="m-3 font-bold">
+                <span>{{ data.userId }}</span>
+              </div>
+              <div class="m-3 text-teal-300">
+                <span>PW 변경</span>
+              </div>
+              <div class="m-3 text-teal-300">
+                <InputText placeholder="변경할 패스워드 입력" class="w-full" />
+              </div>
+              <div>
+                <hr />
+              </div>
+              <div class="flex justify-content-between">
+                <Button
+                  class="flex justify-content-center align-items-center"
+                  label="기록확인"
+                />
+                <Button
+                  class="
+                    flex
+                    justify-content-center
+                    align-items-center
+                    p-button-outlined p-button-danger
+                  "
+                  label="계정삭제"
+                />
+                <Button
+                  class="
+                    flex
+                    justify-content-center
+                    align-items-center
+                    p-button-outlined p-button-success
+                  "
+                  label="변경"
+                />
+              </div>
+            </div>
           </div>
         </div>
+      </swiper-slide>
+    </swiper>
+    <!--2-->
+    <!--3-->
+    <div class="card">
+      <div class="text-4xl font-bold m-3">
+        <span>###님 업무 기록</span>
       </div>
-      <!--1-->
+      <CertificateTable :TableData="products" :which="4" />
     </div>
+    <!--3-->
   </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import { addDoc, getDocs } from "firebase/firestore/lite";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, Pagination, Navigation } from "swiper";
 import hospitalColRef from "@/service/firebase/firebase.js";
 import constant from "@/common/constant";
+import CertificateTable from "@/components/tables/CertificateTable.vue";
+import certificateData from "@/tmp/certificate/waitingIssu.json";
+
+import "swiper/css";
+import "swiper/css/pagination";
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+    CertificateTable,
+  },
   setup() {
     const userId = ref("");
     const userPw = ref("");
@@ -122,6 +159,9 @@ export default {
     const isNodata = ref(false);
     const addUserList = ref({});
     const userList = ref([]);
+    const showUserList = ref([]);
+    const products = certificateData.resultData;
+
     onMounted(() => {
       getUserData();
     });
@@ -130,13 +170,29 @@ export default {
       const hospitalSnapshot = await getDocs(hospitalColRef);
       userList.value = hospitalSnapshot.docs.map((doc) => doc.data());
       let checkIdx = 0;
+      let innerData = {};
+      let show = [];
       userList.value.forEach((el) => {
         if (el.userIdx > checkIdx) {
           checkIdx = el.userIdx;
         }
+        show.push(el);
+        innerData = {
+          show,
+        };
+        if (show.length === 3) {
+          showUserList.value.push(innerData);
+          show = [];
+          innerData = {};
+        }
       });
+      if (show.length !== 0) {
+        showUserList.value.push(innerData);
+      }
+
       userIdx.value = checkIdx + 1;
       console.log(userIdx.value);
+      console.log(showUserList.value);
     };
 
     const createUser = async () => {
@@ -149,7 +205,7 @@ export default {
         console.log(addUserList.value);
       }
     };
-    
+
     const checkUserData = () => {
       const han = constant.regExp.HANGUL;
       const engnum = constant.regExp.ENGNUM;
@@ -172,11 +228,13 @@ export default {
     };
 
     return {
-      userList,
+      showUserList,
       userNm,
       userId,
       userPw,
+      products,
       createUser,
+      modules: [Autoplay, Pagination, Navigation],
     };
   },
 };

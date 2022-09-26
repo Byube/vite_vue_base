@@ -20,31 +20,63 @@
     </template>
     <template #empty>No customers found.</template>
     <template #loading>Loading customers data. Please wait.</template>
-    <Column header="번호" field="id" bodyStyle="text-align: center" />
+
+    <!--1-->
+    <Column
+      header="상태"
+      field="resStatus"
+      bodyStyle="text-align: center"
+      v-if="which === 4"
+    >
+      <template #body="slotProps">
+        {{ slotProps.data.resStatus === "Y" ? "발급" : "내역없음" }}
+      </template>
+    </Column>
+    <Column header="번호" field="id" bodyStyle="text-align: center" v-else />
+    <!--1-->
+
+    <!--2-->
     <Column
       field="userNm"
       header="환자명(휴대폰)"
       bodyStyle="text-align: center"
     ></Column>
+    <!--2-->
+
+    <!--3-->
     <Column header="완료/총신청수" bodyStyle="text-align: center">
       <template #body="slotProps">
         {{ checkStatus(slotProps.data.applicationCert) }} /
         {{ slotProps.data.applicationCert.length }}
       </template>
     </Column>
+    <!--3-->
+
+    <!--4-->
     <Column field="department" header="진료과" bodyStyle="text-align: center" />
+    <!--4-->
+
+    <!--5-->
     <Column
       field="medicalstaff"
       header="의료진"
       bodyStyle="text-align: center"
     />
+    <!--5-->
+
+    <!--6-->
     <Column
       field="diagnosisData"
       header="진료일"
       bodyStyle="text-align: center"
     />
+    <!--6-->
 
+    <!--7-->
     <Column field="purpose" header="용도" bodyStyle="text-align: center" />
+    <!--7-->
+
+    <!--8-->
     <Column
       field="reqDate"
       header="신청일"
@@ -63,8 +95,9 @@
       bodyStyle="text-align: center"
       v-else
     />
+    <!--8-->
     <!--expansion datas-->
-    <template #expansion="slotProps">
+    <template #expansion="slotProps" v-if="which !== 4">
       <div class="orders-subtable">
         <div class="card">
           <div class="grid">
@@ -178,7 +211,7 @@
             <!--2-->
           </div>
           <div>
-            <Button label="완료" class="w-full" @click="sendDatas"/>
+            <Button label="완료" class="w-full" @click="sendDatas" />
           </div>
         </div>
       </div>

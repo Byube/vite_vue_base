@@ -41,6 +41,9 @@ export default {
     data:{
         home:{
             TABLE_HEADER:["환자명", "진료과", "의료진", "진료일", "용도"]
+        },
+        user:{
+            TABLE_HEADER:["상태", "환자명(휴대폰)", "완료/총신청수", "진료과", "의료진", "진료일", "용도", "처리일"]
         }
     },
     regExp:{
