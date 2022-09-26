@@ -16,7 +16,7 @@ import 'prismjs/themes/prism-coy.css';
 import './assets/styles/layout.scss';
 import './assets/demo/flags/flags.css';
 
-import { createApp, reactive} from 'vue';
+import { createApp, reactive } from 'vue';
 import App from './App.vue';
 // import AppWrapper from '@/views/wrapper/AppWrapper.vue';
 import router from './router';
@@ -112,11 +112,11 @@ import CodeHighlight from './AppCodeHighlight';
 import BlockViewer from './BlockViewer.vue';
 
 // (async () => {
-    router.beforeEach((to, from, next) => {
-        console.log(to.name);
-        window.scrollTo(0,0);
-        next();
-    });
+router.beforeEach((to, from, next) => {
+    console.log(to.name);
+    window.scrollTo(0, 0);
+    next();
+});
 // });
 
 const app = createApp(App);

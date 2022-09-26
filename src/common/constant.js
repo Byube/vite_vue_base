@@ -46,6 +46,8 @@ export default {
     regExp:{
         NUMBER: /^[0-9]+$/,
         HANGUL: /^[ㄱ-ㅎ|가-힣]+$/,
+        ENGLISH: /^[a-zA-Z]*$/,
+        ENGNUM: /^[a-zA-Z0-9]*$/,
     }
 
 
