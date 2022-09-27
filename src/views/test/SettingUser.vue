@@ -191,7 +191,6 @@ export default {
       }
 
       userIdx.value = checkIdx + 1;
-      console.log(userIdx.value);
       console.log(showUserList.value);
     };
 
