@@ -32,12 +32,12 @@
           </div>
           <div class="m-3">
             <RadioButton
-              inputId="possible1"
-              name="possible1"
+              inputId="possible"
+              name="possible"
               value="possible"
               v-model="status"
             />
-            <label class="ml-3 text-xl font-bold" for="possible1"
+            <label class="ml-3 text-xl font-bold" for="possible"
               >신청가능</label
             >
           </div>
@@ -87,29 +87,36 @@
             <label for="documentNm">가격(원)</label>
           </div>
           <div class="m-3">
-            <span class="text-xl font-bold"> {{ data.documentPrice }} </span>
+            <span class="text-xl font-bold">
+              {{ numberFormat(data.documentPrice) }}
+            </span>
           </div>
           <div class="m-3">
             <span class="text-teel"> 신청가능 설정 </span>
           </div>
           <div class="m-3">
             <RadioButton
-              inputId="possible0001"
-              name="possible"
-              value="possible0001"
+              :inputId="'possible' + data.documentIdx"
+              :name="data.documentStatus"
+              :value="'possible' + data.documentIdx"
+              v-model="dcs[idx]"
             />
-            <label class="ml-3 text-xl font-bold" for="possible0001"
+            <label
+              class="ml-3 text-xl font-bold"
+              :for="'possible' + data.documentIdx"
               >신청가능</label
             >
           </div>
           <div class="m-3">
             <RadioButton
-              inputId="impossible"
+              :inputId="'impossible' + data.documentIdx"
               name="impossible"
-              value="impossible"
-              v-model="status"
+              :value="'impossible' + data.documentIdx"
+              v-model="dcs[idx]"
             />
-            <label class="ml-3 text-xl font-bold" for="impossible"
+            <label
+              class="ml-3 text-xl font-bold"
+              :for="'impossible' + data.documentIdx"
               >신청불가</label
             >
           </div>
@@ -118,7 +125,11 @@
           </div>
           <div class="flex justify-content-end align-items-end">
             <Button label="삭제" class="p-button-danger p-button-text" />
-            <Button label="변경" class="p-button-success p-button-text" />
+            <Button
+              label="변경"
+              class="p-button-success p-button-text"
+              @click="updateDocument(data.documentId, dcs[idx])"
+            />
           </div>
         </div>
       </div>
@@ -129,16 +140,26 @@
 
 <script>
 import { onMounted, ref } from "vue";
-import documentColRef from "@/service/firebase/firebaseDocument.js";
-import { addDoc, getDocs } from "firebase/firestore/lite";
+import { db } from "@/service/firebase/firebase.js";
+import {
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  collection,
+  doc,
+} from "firebase/firestore/lite";
+import { numberFormat } from "@/service/number/format.js";
 export default {
   setup() {
+    const documentColRef = collection(db, "document");
     const status = ref();
     const documentNm = ref("");
     const documentPrice = ref(0);
     const documentIdx = ref(0);
     const addDocumentList = ref({});
     const documentList = ref([]);
+    const dcs = ref([]);
 
     onMounted(() => {
       getDocumentList();
@@ -155,23 +176,49 @@ export default {
       const addedDoc = await addDoc(documentColRef, addDocumentList.value);
       console.log(addedDoc);
       console.log(addDocumentList.value);
+      status.value = "";
+      getDocumentList();
     };
 
     const getDocumentList = async () => {
-      const documentSnapshot = await getDocs(documentColRef);
-      documentList.value = documentSnapshot.docs.map((doc) => doc.data());
-      let checkIdx = 0;
+      dcs.value = [];
+      documentList.value = [];
+      try {
+        const documentSnapshot = await getDocs(documentColRef);
+        documentSnapshot.docs.map((doc) => {
+          let setData = doc.data();
+          setData = {
+            ...setData,
+            documentId:doc.id
+          }
+          documentList.value.push(setData);
+        });
+        console.log(documentList.value);
+        let checkIdx = 0;
+        documentList.value.forEach((el) => {
+          if (el.documentIdx > checkIdx) {
+            checkIdx = el.documentIdx;
+          }
+          dcs.value.push(el.documentStatus);
+        });
+        documentIdx.value = checkIdx + 1;
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      documentList.value.forEach((el) => {
-        if (el.documentIdx > checkIdx) {
-          checkIdx = el.documentIdx;
-        }
-      });
-
-      documentIdx.value = checkIdx + 1;
-
-      console.log(documentIdx.value);
-      console.log(documentList.value);
+    const updateDocument = async (idx, status) => {
+      console.log(status);
+      const documentDoc = doc(db, "document", idx);
+      try {
+        const res = await updateDoc(documentDoc, {
+          documentStatus: status,
+        });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+      // getDocumentList();
     };
 
     return {
@@ -179,7 +226,10 @@ export default {
       documentNm,
       documentPrice,
       documentList,
+      dcs,
       createNewDocument,
+      updateDocument,
+      numberFormat,
     };
   },
 };

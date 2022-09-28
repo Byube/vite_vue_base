@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore/lite";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCmRes3faYcZ6CX5xu5xl8aS9CP70Nskqs",
     authDomain: "non-linked-service.firebaseapp.com",
@@ -13,8 +13,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const hospitalColRef = collection(db, "hospitalUser");
 
-// 내보내기
-export default hospitalColRef;
+export const db = getFirestore(app);

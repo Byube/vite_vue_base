@@ -135,10 +135,10 @@
 
 <script>
 import { onMounted, ref } from "vue";
-import { addDoc, getDocs } from "firebase/firestore/lite";
+import { addDoc, collection, getDocs } from "firebase/firestore/lite";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import hospitalColRef from "@/service/firebase/firebase.js";
+import { db } from "@/service/firebase/firebase.js";
 import constant from "@/common/constant";
 import CertificateTable from "@/components/tables/CertificateTable.vue";
 import certificateData from "@/tmp/certificate/waitingIssu.json";
@@ -152,6 +152,7 @@ export default {
     CertificateTable,
   },
   setup() {
+    const hospitalColRef = collection(db, "hospitalUser");
     const userId = ref("");
     const userPw = ref("");
     const userNm = ref("");
