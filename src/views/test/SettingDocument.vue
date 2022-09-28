@@ -124,7 +124,11 @@
             <hr />
           </div>
           <div class="flex justify-content-end align-items-end">
-            <Button label="삭제" class="p-button-danger p-button-text" />
+            <Button
+              label="삭제"
+              class="p-button-danger p-button-text"
+              @click="deleteDocument(data.documentId)"
+            />
             <Button
               label="변경"
               class="p-button-success p-button-text"
@@ -189,8 +193,8 @@ export default {
           let setData = doc.data();
           setData = {
             ...setData,
-            documentId:doc.id
-          }
+            documentId: doc.id,
+          };
           documentList.value.push(setData);
         });
         console.log(documentList.value);
@@ -208,7 +212,6 @@ export default {
     };
 
     const updateDocument = async (idx, status) => {
-      console.log(status);
       const documentDoc = doc(db, "document", idx);
       try {
         const res = await updateDoc(documentDoc, {
@@ -218,8 +221,18 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      // getDocumentList();
     };
+    
+    const deleteDocument = async (idx) => {
+      const documentDoc = doc(db, "document", idx);
+      try {
+        const res = await deleteDoc(documentDoc);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+      getDocumentList();
+    }
 
     return {
       status,
@@ -229,6 +242,7 @@ export default {
       dcs,
       createNewDocument,
       updateDocument,
+      deleteDocument,
       numberFormat,
     };
   },
