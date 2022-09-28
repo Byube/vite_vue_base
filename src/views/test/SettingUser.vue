@@ -57,7 +57,7 @@
     <swiper
       :centeredSlides="true"
       :autoplay="{
-        delay: 2500,
+        delay: 3000,
         disableOnInteraction: false,
       }"
       :pagination="{
@@ -105,6 +105,7 @@
                     p-button-outlined p-button-danger
                   "
                   label="계정삭제"
+                  @click="deleteUser(data.userIds)"
                 />
                 <Button
                   class="
@@ -135,7 +136,13 @@
 
 <script>
 import { onMounted, ref } from "vue";
-import { addDoc, collection, getDocs } from "firebase/firestore/lite";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore/lite";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { db } from "@/service/firebase/firebase.js";
@@ -168,8 +175,19 @@ export default {
     });
 
     const getUserData = async () => {
+      let userid = [];
+      userList.value = [];
+      showUserList.value = [];
       const hospitalSnapshot = await getDocs(hospitalColRef);
       userList.value = hospitalSnapshot.docs.map((doc) => doc.data());
+      userid = hospitalSnapshot.docs.map((doc) => doc.id);
+      for (let i = 0; i < userid.length; i++) {
+        userList.value[i] = {
+          ...userList.value[i],
+          userIds: userid[i],
+        };
+      }
+      console.log(userList.value);
       let checkIdx = 0;
       let innerData = {};
       let show = [];
@@ -190,20 +208,24 @@ export default {
       if (show.length !== 0) {
         showUserList.value.push(innerData);
       }
-
       userIdx.value = checkIdx + 1;
-      console.log(showUserList.value);
     };
 
     const createUser = async () => {
       checkUserData();
       if (!isNodata.value) {
-        const addedDoc = await addDoc(hospitalColRef, addUserList.value);
-        console.log(addedDoc);
-        getUserData();
+        try {
+          const addedDoc = await addDoc(hospitalColRef, addUserList.value);
+          console.log(addedDoc);
+          getUserData();
+          resetData();
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        console.log(addUserList.value);
+        return;
       }
+      console.log(addUserList.value);
     };
 
     const checkUserData = () => {
@@ -227,6 +249,25 @@ export default {
       };
     };
 
+    const deleteUser = async (idx) => {
+      const userDoc = doc(db, "hospitalUser", idx);
+      try {
+        const res = await deleteDoc(userDoc);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+      getUserData();
+    };
+
+    const resetData = () => {
+      addUserList.value = {};
+      userIdx.value = 0;
+      userId.value = "";
+      userNm.value = "";
+      userPw.value = "";
+    };
+
     return {
       showUserList,
       userNm,
@@ -234,6 +275,7 @@ export default {
       userPw,
       products,
       createUser,
+      deleteUser,
       modules: [Autoplay, Pagination, Navigation],
     };
   },
